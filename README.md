@@ -1,4 +1,4 @@
-# Learning and Dynamical Models for Sub-seasonalClimate Forecasting: Comparison and Collaboration (SSF-MIP)
+# Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration (SSF-MIP)
 
 Code for generating ground truth dataset, extract data from SubX dataset, and training and evaluating Machine Learning-based forecasting models
 
