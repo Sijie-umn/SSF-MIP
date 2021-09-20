@@ -25,8 +25,11 @@ for year in range(1979, 2021):
     s = s.dropna()
     s.to_hdf('tmp2m.{}.verif.h5'.format(year), key='data')
 
-# save tmp2m covering western us
+# create tmp2m covering western us
+# combine all the western us data and save it into one pandas dataframe
+
 w_us = pd.read_hdf('western_us_mask.h5')  # a pandas DataFrame with lat and lon covering western us
+df_tmp2m = pd.DataFrame()
 for year in range(1979, 2021):
     print('year: ', year)
     data = pd.read_hdf('tmp2m.{}.verif.h5'.format(year))
@@ -34,12 +37,6 @@ for year in range(1979, 2021):
     data['lat'] = data['lat'].astype('float')
     data['lon'] = data['lon'].astype('float')
     data = w_us.merge(data, on=['lat', 'lon'], how='inner')
-    data.to_hdf('tmp2m.{}.western_us.h5'.format(year), key='data')
-
-
-# combine all the western us data and save it into one pandas dataframe
-df_tmp2m = pd.DataFrame()
-for year in range(1979, 2021):
-    temp = pd.read_hdf('tmp2m.{}.western_us.h5'.format(year))
-    df_tmp2m = df_tmp2m.append(temp)
+    # data.to_hdf('tmp2m.{}.western_us.h5'.format(year), key='data')
+    df_tmp2m = df_tmp2m.append(data)
 df_tmp2m.to_hdf('tmp2m_western_us.h5', key='data')
