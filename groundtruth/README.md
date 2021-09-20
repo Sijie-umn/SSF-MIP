@@ -7,8 +7,8 @@ The code in this folder is used for constructing the ground truth dataset. The o
 
 Run mip\_tmp2m.sh as 
 
-    chmod +x mip\_tmp2m.sh
-    ./mip\_tmp2m.sh
+    chmod +x mip_tmp2m.sh
+    ./mip_tmp2m.sh
 
 
 ***Step 2*** - Regrid the data to the resolution as 1-degree latitude by 1-degree longitude
