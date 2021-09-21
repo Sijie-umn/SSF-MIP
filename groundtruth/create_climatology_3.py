@@ -15,7 +15,7 @@ def get_std(df):
 climo_smooth = scipy.io.loadmat('climo_smooth.mat')['climo']
 climo_smooth = climo_smooth[:, :, 31:-31]
 climo_new = xr.open_dataset("climo_2d.nc")
-climo_new.values = climo_smooth
+climo_new['tmp2m_mean'].values = climo_smooth
 df_climo = climo_new.to_dataframe()
 df_climo = df_climo.dropna()
 df_climo = df_climo.reset_index()
