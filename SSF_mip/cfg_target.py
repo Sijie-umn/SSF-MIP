@@ -3,9 +3,9 @@ import numpy as np
 ################### Configuration for Data Loading ################################
 path = '/SSF_mip/data/'  # need to change to the absolute path of the data files
 absolute_path = '/SSF_mip/'  # need to change to the absolute path of the code files
-rootpath_cv = absolute_path + 'random_cv/'
-forecast_rootpath = absolute_path + 'forecast/'
-param_path = absolute_path + 'random_cv/cv_results_test/best_parameter/'
+rootpath_cv = absolute_path + 'data/random_cv/'
+forecast_rootpath = absolute_path + 'data/forecast/'
+param_path = absolute_path + 'data/random_cv/cv_results_test/best_parameter/'
 save_path = 'data/'
 # target variables
 target = 'tmp2m'  # target variable: 'tmp2m' or 'precip'
@@ -55,8 +55,9 @@ save_cov = True    # flag to indicate weather to save covariance
 ################### Configuration for Dataset ################################
 
 # preprocessing
-rootpath_data = 'data/'
-savepath_data = 'data/'
+rootpath_data = absolute_path + 'data/'
+savepath_data = absolute_path + 'data/'
+
 vars = ['sst', 'sst', 'sm', 'tmp2m', 'hgt10', 'hgt500', 'slp', 'rhum.sig995']
 locations = ['atlantic', 'pacific', 'us', 'us', 'us', 'us', 'us', 'us']
 
