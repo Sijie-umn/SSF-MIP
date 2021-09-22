@@ -2,17 +2,17 @@ from netCDF4 import Dataset
 import pandas as pd
 import numpy as np
 
-western_us = pd.read_hdf('western_us.h5')
+western_us = pd.read_hdf('western_us_mask.h5')
 
 for model in ['NCEP', 'GMAO']:
 
     if model == 'NCEP':
         date = pd.date_range('1999-01-01', '2015-12-31')
-        path = '/subx/hindcast/tas2m/daily/full/NCEP-CFSv2/'  # the path where the NCEP hindcasts are saved
+        path = 'hindcast/tas2m/daily/full/NCEP-CFSv2/'  # the path where the NCEP hindcasts are saved
         model_name = 'NCEP-CFSv2'
     elif model == 'GMAO':
         date = pd.date_range('1999-01-01', '2015-12-31')
-        path = '/subx/hindcast/tas2m/daily/full/GEOS_V2p1/'  # the path where the GMAO hindcasts are saved
+        path = 'hindcast/tas2m/daily/full/GMAO-GEOS_V2p1/'  # the path where the GMAO hindcasts are saved
         model_name = 'GMAO-GEOS_V2p1'
 
     for t in date:

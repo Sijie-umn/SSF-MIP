@@ -2,18 +2,18 @@ from netCDF4 import Dataset
 import pandas as pd
 import numpy as np
 
-western_us = pd.read_hdf('western_us.h5')
+western_us = pd.read_hdf('western_us_mask.h5')
 
 for model in ['GMAO', 'NCEP']:
 
     if model == 'NCEP':
         date = pd.date_range('2017-07-01', '2019-12-31')
-        path = '/subx/forecast/tas2m/daily/full/NCEP-CFSv2/'  # the path where the NCEP forecasts are saved
+        path = 'forecast/tas2m/daily/full/NCEP-CFSv2/'  # the path where the NCEP forecasts are saved
         model_name = 'NCEP-CFSv2'
         first_date = pd.Timestamp('2017-07-01')
     elif model == 'GMAO':
         date = pd.date_range('2017-07-25', '2020-09-28')
-        path = '/subx/forecast/tas2m/daily/full/GEOS_V2p1/'  # the path where the GMAO forecasts are saved
+        path = 'forecast/tas2m/daily/full/GMAO-GEOS_V2p1/'  # the path where the GMAO forecasts are saved
         model_name = 'GMAO-GEOS_V2p1'
         first_date = pd.Timestamp('2017-07-25')
 
