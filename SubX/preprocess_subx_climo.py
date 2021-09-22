@@ -4,15 +4,15 @@ import numpy as np
 
 # model = 'GMAO'  # 'NCEP'
 
-western_us = pd.read_hdf('western_us.h5')
+western_us = pd.read_hdf('western_us_mask.h5')
 
 for model in ['GMAO', 'NCEP']:
     date = pd.date_range('2020-01-01', '2020-12-31')  # use 2020 as an example for 365 days
     if model == 'GMAO':
-        path = '/subx/hindcast/tas2m/daily/climo/GMAO-GEOS_V2p1/'  # the path where the GMAO hindcasts are saved
+        path = 'hindcast/tas2m/daily/climo/GMAO-GEOS_V2p1/'  # the path where the GMAO hindcasts are saved
         climo_file = 'tmp2m_GMAO_climo.h5'
     elif model == 'NCEP':
-        path = '/subx/hindcast/tas2m/daily/climo/NCEP-CFSv2/'  # the path where the NCEP hindcasts are saved
+        path = 'hindcast/tas2m/daily/climo/NCEP-CFSv2/'  # the path where the NCEP hindcasts are saved
         climo_file = 'tmp2m_NCEP_climo.h5'
 
     for t in date:
