@@ -2,8 +2,8 @@ from netCDF4 import Dataset
 import pandas as pd
 import numpy as np
 
-ncep_path = '/subx/forecast/tas2m/daily/full/NCEP-CFSv2/'  # the path where the raw data from NCEP-CFSv2 is saved
-gmao_path = '/subx/forecast/tas2m/daily/full/GMAO-GEOS_V2p1/'
+ncep_path = '/SubX/forecast/tas2m/daily/full/NCEP-CFSv2/'  # the path where the raw data from NCEP-CFSv2 is saved
+gmao_path = '/SubX/forecast/tas2m/daily/full/GMAO-GEOS_V2p1/'
 
 for model in ['NCEP', 'GMAO']:
     if model == 'NCEP':
