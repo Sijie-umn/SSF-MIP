@@ -1,50 +1,22 @@
-# Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration (SSF-MIP)
 
-Code for generating ground truth dataset, extract data from SubX dataset, and training and evaluating Machine Learning-based forecasting models
+## Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration
 
-## Requirements
-The code is compatible with Python 3.6 and the following packages:
-- numpy: 1.19.0
-- pandas: 0.24.2
-- joblib: 0.15.1
-- pickle: 4.0
-- scipy: 1.5.0
-- pytorch: 1.2.0
-- sklearn: 0.23.1
-- xgboost: 1.0.2
-- xarray: 0.17.0
-- netCDF4: 1.5.3
+The three folders contain the code used in the paper *"Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration"*. Due to the size limitation for supplementary materials, only a subset of the data is included in each folder. The codebase and the full dataset will be released along with the paper.
 
-## Getting started
-1. Clone the repo
-2. Create virtual environments and install the necessary python packages listed above
-3. Load raw data from the google drive folder and save it to a folder named "data"
+## Groundtruth
+
+The folder corresponds to Section 3, which contains the code to generate the ground truth dataset (step-by-step from the raw data). Cdo, Matlab, and Python are needed to run the code files. 
 
 
-## Project Structure
+## SubX
 
-### SubX forecasts
+The folder corresponds to Section 4. The code files are used for extracting the SubX forecasts from GMAO-GEOS and NCEP-CFSv2. The code is flexible to be extended for other SubX models.
 
-### Grountruth dataset
+## SSF_mip
 
-### ML models
-
-#### Scripts for generating forecasts
-- cfg_target.py: configure file with all parameters from users
-- load_data: script for a subset of data required by configure file (cfg_target.py)
-- run_preprocess.py: script for data preprocessing
-- create_covariates_pca.py: script for concatenating PCs from all climate variables (covariates)
-- create_datasets.py: script for creating training-validation sets and training-test sets
-- run_random_search.py: script for hyperparameter tuning via random search
-- main_experiments: script for running experiments for all models on training and test sets
-- run_evaluation.py: script for evaluate the performance of forecasting models on training and test sets
+The folder corresponds to Section 5 and Section 6. It contains the code files for data extraction, data preprocessing, and Machine Learning-based SSF model training and evaluation, as well as model comparison with SubX forecasts. The codebase can be easily used for training and evaluating more ML models, which can be used to replicate and hopefully extend our work.
 
 
-#### Functions
-- data_load: folder contains functions for data loading
-- preprocess: folder contains functions for data preprocessing
-- hyperparameter_tuning: folder contains functions for random search
-- forecasting: folder contains scripts for training forecasting models and evaluating on test sets
-- evaluation: folder contains functions for evaluation
-- model: collection of models implemented in experiments
-- utils:utility functions
+There is one separate README.md file in each folder that provides more details.
+
+
