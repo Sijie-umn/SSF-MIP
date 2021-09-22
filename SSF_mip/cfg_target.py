@@ -9,10 +9,6 @@ param_path = absolute_path + 'random_cv/cv_results_test/best_parameter/'
 save_path = 'data/'
 # target variables
 target = 'tmp2m'  # target variable: 'tmp2m' or 'precip'
-target_res = 2  # target resolution
-target_lat = [25.1, 48.9]  # lat range of the target region
-target_lon = [235.7, 292.8]  # lon range of the target region
-target_us_all = True
 shift_days = 14  # 'days to shift for target variable 14 days means 2-week ahead prediction,
 forecast_range = 14  # 'forecast range' - 14 days average or summation
 operation = 'mean'  # 'compute the summation or average over the forecast range
