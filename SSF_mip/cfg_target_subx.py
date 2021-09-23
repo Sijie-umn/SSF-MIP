@@ -1,10 +1,12 @@
 ################### Configuration for Data Loading ################################
 path = 'SSF_mip/'  # need to change to the absolute path of the data files
-absolute_path = 'SSF_mip/ml_subx/'  # need to change to the absolute path of the code files
+absolute_path = 'ml_subx/'  # need to change to the absolute path of the code files
 rootpath_cv = absolute_path + 'random_cv/'
 forecast_rootpath = absolute_path + 'forecast/'
 param_path = absolute_path + 'random_cv/cv_results_test/best_parameter/'
-subx_data_path = 'SubX/data/'  # need to change to the absolute path of the subx data
+subx_data_path = '../SubX/'  # need to change to the absolute path of the subx data
+data_path = path + 'data/'
+target_data_path = '../Groundtruth/'
 
 val_years = [2015, 2014, 2013, 2012, 2011]  # years to create validation sets
 

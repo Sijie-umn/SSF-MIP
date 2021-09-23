@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import importlib
 import pickle
+import cfg_target_subx
 
 
 def save_results(filename, results):
@@ -16,8 +17,11 @@ def save_results(filename, results):
         pickle.dump(results, fh)
 
 
-subx_path = '../../subx/'  # path where subx data are saved
-data_path = '../data/'
+subx_path = cfg_target_subx.subx_data_path  # path where subx data are saved
+data_path = cfg_target_subx.data_path
+target_data_path = cfg_target_subx.target_data_path
+rootpath = cfg_target_subx.absolute_path
+
 for model in ['GMAO', 'NCEP']:
     # create dataset
     cov = pd.read_hdf(data_path + 'covariates_all_pc10.h5')
@@ -26,15 +30,15 @@ for model in ['GMAO', 'NCEP']:
     subx = subx_hindcast.append(subx_forecast).sort_index()
     subx = subx['{}_anom_week34'.format(model)].to_frame()
     subx_dates = subx.reset_index().start_date.drop_duplicates()
-    truth = pd.read_hdf(data_path + 'tmp2m_western_us_anom_rmm.h5').sort_index()
+    truth = pd.read_hdf(target_data_path + 'tmp2m_western_us_anom_rmm.h5').sort_index()
     idx = pd.IndexSlice
 
     # create train validation index
     train_val_index = {}
     train_range = 12
     gap = 28
-    for val_year in [2011, 2012, 2013, 2014, 2015]:
-        for val_month in range(1, 13):
+    for val_year in cfg_target_subx.val_years:
+        for val_month in cfg_target_subx.month_range:
             test_time_index = subx_dates[(subx_dates.dt.month == val_month) & (subx_dates.dt.year == val_year)].reset_index(drop=True)
             test_start = test_time_index[0]
             train_end = test_start - pd.DateOffset(days=gap)
@@ -46,7 +50,7 @@ for model in ['GMAO', 'NCEP']:
     train_test_index = {}
     train_range = 18
     gap = 28
-    for val_year in [2017, 2018, 2019, 2020]:
+    for val_year in cfg_target_subx.test_years:
         if model == 'GMAO':
             if val_year == 2017:
                 month_range = range(7, 13)
@@ -73,22 +77,22 @@ for model in ['GMAO', 'NCEP']:
 
     # create train validation sets
     # create train validation
-    for val_year in [2011, 2012, 2013, 2014, 2015]:
-        for val_month in range(1, 13):
+    for val_year in cfg_target_subx.val_years:
+        for val_month in cfg_target_subx.month_range:
             train_index = train_val_index['{}-{:02d}'.format(val_year, val_month)]['train']
             test_index = train_val_index['{}-{:02d}'.format(val_year, val_month)]['test']
             train_X = [cov.loc[train_index].values, subx.loc[idx[:, :, train_index], :].unstack(level=[0, 1]).values]
             test_X = [cov.loc[test_index].values, subx.loc[idx[:, :, test_index], :].unstack(level=[0, 1]).values]
             train_y = truth.loc[idx[:, :, train_index], :].unstack(level=[0, 1]).values
             test_y = truth.loc[idx[:, :, test_index], :].unstack(level=[0, 1]).values
-            save_results('random_cv/train_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_y)
-            save_results('random_cv/val_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_y)
-            save_results('random_cv/train_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_X)
-            save_results('random_cv/val_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_X)
+            save_results(rootpath + 'random_cv/train_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_y)
+            save_results(rootpath + 'random_cv/val_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_y)
+            save_results(rootpath + 'random_cv/train_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_X)
+            save_results(rootpath + 'random_cv/val_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_X)
 
     # create train test sets
     # create train test
-    for val_year in [2017, 2018, 2019, 2020]:
+    for val_year in cfg_target_subx.test_years:
         if model == 'GMAO':
             if val_year == 2017:
                 month_range = range(7, 13)
@@ -112,7 +116,7 @@ for model in ['GMAO', 'NCEP']:
             test_X = [cov.loc[test_index].values, subx.loc[idx[:, :, test_index], :].unstack(level=[0, 1]).values]
             train_y = truth.loc[idx[:, :, train_index], :].unstack(level=[0, 1]).values
             test_y = truth.loc[idx[:, :, test_index], :].unstack(level=[0, 1]).values
-            save_results('forecast/train_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_y)
-            save_results('forecast/test_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_y)
-            save_results('forecast/train_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_X)
-            save_results('forecast/test_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_X)
+            save_results(rootpath + 'forecast/train_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_y)
+            save_results(rootpath + 'forecast/test_y_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_y)
+            save_results(rootpath + 'forecast/train_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), train_X)
+            save_results(rootpath + 'forecast/test_X_subx_{}_forecast{}_{}.pkl'.format(val_year, val_month, model), test_X)
