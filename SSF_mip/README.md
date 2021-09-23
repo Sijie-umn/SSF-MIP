@@ -35,7 +35,7 @@ The code is compatible with Python 3.6 and the following packages:
    1. Preprocess SubX dataset following the instructions (see the folder SubX)
    2. Execute dataset\_creation\_with\_subx.py to create training-validation sets and training-test sets
 2. Hyperparameter tuning: execute run\_random\_search\_subx.py to find the best parameter by random search
-3. Generate forecasts: execute main_experiments._subx.py to train the ML models with and without including SubX forecasts in their feature sets
+3. Generate forecasts: execute main_experiments\_subx.py to train the ML models with and without including SubX forecasts in their feature sets
 
 
 ### For AutoKNN:
