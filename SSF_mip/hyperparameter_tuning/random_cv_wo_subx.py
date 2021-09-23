@@ -54,12 +54,12 @@ def random_cv(cv_index, cv_year, roothpath, param_grid, num_random, model_name, 
     one_day: True or False, indicating if only the most recent available day is used for training a model (XGBoost or Lasso)
     """
     # load data
-    train_X = load_results(rootpath + 'train_X_pca_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
-    valid_X = load_results(rootpath + 'val_X_pca_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
-    train_y = load_results(rootpath + 'train_y_pca_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
-    valid_y = load_results(rootpath + 'val_y_pca_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
+    train_X = load_results(rootpath + 'train_X_subx_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
+    valid_X = load_results(rootpath + 'val_X_subx_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
+    train_y = load_results(rootpath + 'train_y_subx_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
+    valid_y = load_results(rootpath + 'val_y_subx_{}_forecast{}_{}.pkl'.format(cv_year, cv_index, subx_model))
     # set input and output dim
-    input_dim = train_X.shape[-1]
+    input_dim = train_X[0].shape[-1]
     output_dim = train_y.shape[-1]
 
     if model_name == 'XGBoost':
