@@ -1,6 +1,5 @@
 The code files in this folder are adapated from [Hwang et al](https://arxiv.org/pdf/1809.07394v3.pdf) Improving Subseasonal Forecasting in the Western US with Machine Learning. 
 
-
 ## Environment and packages
 
 The code is compatible with Python 2.7 and the following packages:
