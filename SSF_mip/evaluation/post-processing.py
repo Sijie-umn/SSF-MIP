@@ -17,11 +17,14 @@ from shapely.geometry import Point
 import matplotlib.pyplot as plt
 import matplotlib
 import argparse
-import cfg_target
-import cfg_target_subx
 
 os.chdir(os.path.join(".."))
 sys.path.insert(0, 'SSF_mip/')
+
+import cfg_target
+import cfg_target_subx
+
+cfg_target_subx = cfg_target
 
 
 def load_results(filename):
@@ -39,10 +42,11 @@ def load_results(filename):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_name', type=str, default='EncoderFNN', help='the model used for hyper parameter tuning')
-parser.add_argument('--result_type', type=, default='ml', help='the type of results')
+parser.add_argument('--result_type', type=str, default='ml', help='the type of results')
 
 args = parser.parse_args()
 model_name = args.model_name
+result_type = args.result_type
 lat_lon_grid = pd.read_hdf(cfg_target.absolute_path + 'lat_lon_grid.h5')
 
 
@@ -77,14 +81,14 @@ if result_type == 'ml':  # ML models
     fcst_results = temp.merge(lat_lon_grid, on='lat_lon_index', how='left').drop('lat_lon_index', axis=1)
     fcst_results = fcst_results.set_index(['lat', 'lon', 'start_date'])
     fcst_results = fcst_results.sort_index()
-    fcst_results.to_hdf(rootpath + 'results_{}_{}.h5'.format(model_name, root), key='data')
+    fcst_results.to_hdf(rootpath + 'results_{}.h5'.format(model_name), key='data')
 elif result_type == 'ml_subx':  # ML with subx hindcasts
     rootpath = cfg_target_subx.forecast_rootpath + 'forecast_results/'
     for subx in ['GMAO', 'NCEP', 'wo_GMAO', 'wo_NCEP']:
         if subx in ['GMAO', 'wo_GMAO']:
-            subx_date = pd.read_hdf(data_path + 'GMAO_dates.h5')
+            subx_date = pd.read_hdf(cfg_target_subx.subx_data_path + 'GMAO_dates.h5')
         else:
-            subx_date = pd.read_hdf(data_path + 'NCEP_dates.h5')
+            subx_date = pd.read_hdf(cfg_target_subx.subx_data_path + 'NCEP_dates.h5')
         result = pd.DataFrame()
         for year in range(2017, 2021):
             if subx in ['GMAO', 'wo_GMAO']:

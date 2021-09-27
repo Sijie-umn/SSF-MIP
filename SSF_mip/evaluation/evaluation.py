@@ -4,8 +4,6 @@ import pandas as pd
 from numpy import linalg as LA
 from scipy import stats
 import sys
-sys.path.append('../')
-from utils import *
 
 
 def compute_rmse(target, prediction):
