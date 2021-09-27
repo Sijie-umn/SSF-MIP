@@ -49,7 +49,6 @@ def shift_df(df, shift=None, date_col='start_date', groupby_cols=['lat', 'lon'])
         # Get column names of all variables to be shifted
         # If any of groupby_cols+[date_col] do not exist, ignore error
         cols_to_shift = df.columns.drop(groupby_cols + [date_col], errors='ignore')
-        print(cols_to_shift)
         # Function to shift data frame by shift and extend index
         shift_df = lambda grp_df: grp_df[cols_to_shift].set_index(grp_df[date_col]).shift(shift, freq="D")
         if set(groupby_cols).issubset(df.columns):
@@ -96,7 +95,7 @@ knn_cols = ["knn" + str(ii) for ii in xrange(1, 21)]
 # Create list of official contest submission dates in YYYYMMDD format
 #
 
-target_dates = pd.read_hdf('data/{}_dates.h5'.format(subx))
+target_dates = pd.read_hdf('knn_mip/{}_dates.h5'.format(subx))
 #
 # Create list of target dates corresponding to submission dates in YYYYMMDD format
 #
@@ -156,7 +155,7 @@ relevant_cols = set(x_cols + ['sample_weight',
 # Create dataset with relevant columns only; otherwise the dataframe is too big
 
 
-target = pd.read_hdf('data/tmp2m_western_us_anom_rmm.h5')
+target = pd.read_hdf('knn_mip/tmp2m_western_us_anom_rmm.h5')
 target.reset_index(level=['start_date', 'lat', 'lon'], inplace=True)
 target_shift_15 = shift_df(target, shift=29, date_col='start_date', groupby_cols=['lat', 'lon'])
 target_shift_43 = shift_df(target, shift=57, date_col='start_date', groupby_cols=['lat', 'lon'])
@@ -273,13 +272,13 @@ for target_date_obj in target_dates:
     # Concatenate predictions
     all_preds = pd.concat([all_preds, preds])
     toc()
-    # ---------------
-    # Evaluate only on target dates
-    # ---------------
-    tic()
-    skills = get_col_skill(all_preds[all_preds.start_date.isin(target_dates)], "truth", "forecast", time_average=False)
-    print "running mean skill = {}".format(skills.mean())
-    toc()
+#    # ---------------
+#    # Evaluate only on target dates
+#    # ---------------
+#    tic()
+#    skills = get_col_skill(all_preds[all_preds.start_date.isin(target_dates)], "truth", "forecast", time_average=False)
+#    print "running mean skill = {}".format(skills.mean())
+#    toc()
 
 result = all_preds.copy()
 result.to_hdf('knn_mip/results_autoknn_{}.h5'.format(subx), key='result')
