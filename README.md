@@ -1,7 +1,7 @@
 
 ## Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration
 
-The three folders contain the code used in the paper *"Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration"*. Due to the size limitation for supplementary materials, only a subset of the data is included in each folder. The codebase and the full dataset will be released along with the paper.
+The three folders contain the code used in the paper *"Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration"*. 
 
 ## Groundtruth
 
