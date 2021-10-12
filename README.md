@@ -1,7 +1,7 @@
 
 ## Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration
 
-The three folders contain the code used in He et al. *"[Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration](https://arxiv.org/abs/2110.05196)"*. 
+The three folders contain the code used in He et al. *"[Learning and Dynamical Models for Sub-seasonal Climate Forecasting: Comparison and Collaboration](https://arxiv.org/abs/2110.05196)"*. The Sub-seasonal Climate Forecasting (SSF) Dataset constructed in the paper can be found at https://sites.google.com/view/ssf-dataset/home.
 
 ## Groundtruth
 
